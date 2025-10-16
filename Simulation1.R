@@ -1,5 +1,5 @@
 
-#Code for simulations in MCCLC model
+#Code for simulation 1
 library(Rcpp)
 library(RcppEigen)
 library(RcppArmadillo)
