@@ -1,6 +1,7 @@
 # Log-likelihood approximation for LC models when using stochastic EM algorithm
 
-This is the code we used for the simulations in the paper "...". 
+This is the code we used for the simulations in the paper "Log-likelihood approximation when using
+stochastic EM in latent class models". 
 The code in this version is available for simulation reproducibility purposes only.
 
 ## Usage
