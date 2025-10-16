@@ -2,70 +2,19 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::depends(RcppEigen)]]
 #include <iostream>
-#include <boost/random.hpp>
+#include </opt/homebrew/Cellar/boost/1.81.0_1/include/boost/random.hpp>
 #include <cmath>
 #include <vector>
 #include <string>
 #include <armadillo>
-#include <unsupported/Eigen/CXX11/Tensor>
+#include</opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/unsupported/Eigen/CXX11/Tensor>
 #define _USE_MATH_DEFINES
 #include <chrono>
+
 
 using namespace Eigen;
 using namespace std;
 using namespace arma;
-
-
-//funzione per l'ordinamento dei dati rispetto a k e q.
-bool comparator(std::vector<int> &a, std::vector<int> &b){
-    if(a[1] < b[1]) return true;
-    else if(a[1] == b[1])
-    {
-        if(a[2] < b[2]) return true;
-        else return false;
-    }
-    else return false;
-}
-
-//lettura file
-void parser(std::string filename, std::vector< std::vector<int> > &student_vector)
-{
-    std::fstream f(filename);
-
-    if(!f.is_open())
-    {
-        std::cerr << "ERROR in opening file" << std::endl;
-        exit(-1);
-    }
-
-    std::string line;
-
-    while(std::getline(f, line))
-    {
-        std::vector<int> s(7);
-        //sscanf(line.data(), "%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d", &s[0], &s[1], &s[2], &s[3], &s[4], &s[5], &s[6], &s[7], &s[8], &s[9], &s[10]);
-        sscanf(line.data(), "%d, %d, %d, %d, %d, %d, %d", &s[0], &s[1], &s[2], &s[3], &s[4], &s[5], &s[6]);
-        student_vector.push_back(s);
-    }
-
-    f.close();
-}
-
-//funzione per convertire i dati letti come vettori in una matrice.
-mat vector_to_matrix(const std::vector< std::vector<int> > &student_vector)
-{
-    mat y(student_vector.size(),student_vector[0].size());
-
-    for(int i = 0; i < student_vector.size(); i++)
-    {
-        for(int j = 0; j < student_vector[i].size(); j++)
-        {
-            y(i,j) = student_vector[i][j];
-        }
-    }
-
-    return y;
-}
 
 // sample from dirichlet distribution
 arma::vec rdirichlet(arma::vec alpha_m)
@@ -92,24 +41,35 @@ arma::vec rdirichlet(arma::vec alpha_m)
     return(distribution);
 }
 
-// [[Rcpp::export]]
-int main() {
 
-    //remove("C:/Users/nicol/Desktop/statistica/Progetto/fileBIC.txt");
-    auto start = chrono::steady_clock::now();
-    std::vector<std::vector<int> > student_vector;
-
-    parser("C:/Users/nicol/Desktop/statistica/Progetto/dati_logLapprox_standard.txt", student_vector);
-    std::sort(student_vector.begin(), student_vector.end(), comparator);
-
-    int _n = student_vector.size();
-    int _G;
-    for (int j = 0; j < _n; j++) {
-        _G = student_vector[j].size();
+tuple <mat,int,int> vector_to_matrix(const std::vector< std::vector<int> > &student_vector)
+{
+  mat y(student_vector.size(),student_vector[0].size());
+  
+  for(int i = 0; i < student_vector.size(); i++)
+  {
+    for(int j = 0; j < student_vector[i].size(); j++)
+    {
+      y(i,j) = student_vector[i][j];
     }
+  }
+  
+  int _n=student_vector.size();
+  int _G=student_vector[0].size();
+  
+  return {y,_n,_G};
+}
 
-    mat y;
-    y = vector_to_matrix(student_vector);
+
+// [[Rcpp::export]]
+int main2(vector<vector<int>> yy){
+  mat y;
+  int _n;
+  int _G;
+  tie(y,_n,_G)=vector_to_matrix(yy);
+  
+    auto start = chrono::steady_clock::now();
+    std::vector< std::vector<int> > student_vector;
 
     int _L, _iter2, _iter1, _vl;
     //_L=4;
@@ -152,8 +112,6 @@ int main() {
         }
     }
     _C=maa;
-
-    cout<< _C <<endl;
 
 //different starting points
     for (int v = 1; v < _vl; v++) {
