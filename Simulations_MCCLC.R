@@ -2,7 +2,8 @@
 library(Rcpp)
 library(RcppEigen)
 library(RcppArmadillo)
-Rcpp::sourceCpp("MCCLC_hybrid_categorical.cpp")
+Rcpp::sourceCpp("Multilevel_CCLC_stochastic.cpp")
+#Rcpp::sourceCpp("Multilevel_CCLC_bayesian.cpp")
 
 L <- 4
 R <- 2
