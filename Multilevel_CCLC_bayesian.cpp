@@ -16,6 +16,45 @@ using namespace Eigen;
 using namespace std;
 using namespace arma;
 
+int fattoriale(int a){
+    int f=1;
+    if(a==0){
+        f=1;
+    }
+    if(a>0){
+        for(int i=0;i<a;i++){
+            f=f*(a-i);
+        }
+    }
+    return f;
+}
+
+
+// sample from dirichlet distribution
+arma::vec rdirichlet(arma::vec alpha_m)
+{
+    int distribution_size = alpha_m.n_elem;
+    arma::vec distribution = arma::zeros(distribution_size);
+
+    double sum_term = 0 ;
+    // draw Gamma variables
+    for (int j = 0; j < distribution_size; j++){
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::gamma_distribution<> d(alpha_m[j], 1.0);
+        double cur = d(gen);
+
+        distribution(j) = cur;
+        sum_term += cur;
+    }
+    // normalize
+    for (int j = 0; j < distribution_size; j++){
+        distribution(j) = distribution(j)/sum_term;
+    }
+    return(distribution);
+}
+
 
 tuple <mat,int,int> vector_to_matrix(const std::vector< std::vector<int> > &student_vector)
 {
@@ -45,4 +84,6 @@ int main2(vector<vector<int>> yy){
   
     auto start = chrono::steady_clock::now();
     std::vector< std::vector<int> > student_vector;
+
+.......................................
 
