@@ -3908,7 +3908,7 @@ int main2(vector<vector<int>> yy){
                 }
 
 
-                for (int i = 0; i < (_H - 1); i++) {
+                /*for (int i = 0; i < (_H - 1); i++) {
                     min1 = i;
                     for (int j = (i + 1); j < _H; j++) {
                         if (_p_hcc_hat[j] < _p_hcc_hat[min1]) {
@@ -3950,7 +3950,7 @@ int main2(vector<vector<int>> yy){
                         }
                     }
 
-                }
+                }*/
 
 
                 //_p_hat
@@ -4258,12 +4258,12 @@ int main2(vector<vector<int>> yy){
 
     cout<<"ph"<<endl;
     for (int h = 0; h < _H; h++) {
-        cout<<phf[h]<<",";
+        cout<<phcf[h]<<",";
     }
     cout<<"\n";
     cout<<"pr"<<endl;
     for (int r = 0; r < _R; r++) {
-        cout<<prf[r]<<",";
+        cout<<prcf[r]<<",";
     }
     cout<<"\n";
     cout<<"pl(l,0,0)"<<endl;
