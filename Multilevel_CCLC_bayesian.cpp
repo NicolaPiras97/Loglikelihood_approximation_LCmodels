@@ -1774,8 +1774,8 @@ int main2(vector<vector<int>> yy){
         for (int l = 0; l < _L; l++) {
             for (int h = 0; h < _H; h++) {
                 for (int r = 0; r < _R; r++) {
-                    dir_param_plhr(l,h, r) = _pi_l(l,h, r);
-                    //dir_param_plhr(l,h, r) = 4;
+                    //dir_param_plhr(l,h, r) = _pi_l(l,h, r);
+                    dir_param_plhr(l,h, r) = 4;
                 }
             }
         }
@@ -1786,7 +1786,7 @@ int main2(vector<vector<int>> yy){
                 for (int l = 0; l < _L; l++) {
                     for (int h = 0; h < _H; h++) {
                         for (int r = 0; r < _R; r++) {
-                            dir_param_p(i, c, l) = _p(i, c, l, h, r);
+                            dir_param_p(i, c, l) =1;// _p(i, c, l, h, r);
                         }
                     }
                 }
