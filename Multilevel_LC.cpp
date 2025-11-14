@@ -2767,20 +2767,20 @@ if(u1>=_burn && u1!=it[mu]){
 
     arma::vec dir_param_pr(_R);
         for (int r = 0; r < _R; r++) {
-            dir_param_pr(r) = _p_r[r];
+            dir_param_pr(r) =4;// _p_r[r];
         }
 
     arma::mat dir_param_plr(_L,_R);
     for (int l = 0; l < _L; l++) {
         for (int r = 0; r < _R; r++) {
-            dir_param_plr(l,r) = _pi_l(l,r);
+            dir_param_plr(l,r) =4;// _pi_l(l,r);
         }
     }
     arma::cube dir_param_p(_I, _C, _L);
     for (int i = 0; i < _I; i++) {
         for (int c = 0; c < _C; c++) {
             for (int l = 0; l < _L; l++) {
-                dir_param_p(i, c, l) = _p(i,c,l,0);
+                dir_param_p(i, c, l) =1// _p(i,c,l,0);
             }
         }
     }
