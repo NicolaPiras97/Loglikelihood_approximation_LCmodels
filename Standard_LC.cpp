@@ -1029,13 +1029,13 @@ int main2(vector<vector<int>> yy){
 
             arma::vec dir_param_pl(_L);
             for (int l = 0; l < _L; l++) {
-                dir_param_pl(l) = _pl[l];
+                dir_param_pl(l) =4;// _pl[l];
             }
             arma::cube dir_param_p(_I, _C, _L);
             for (int i = 0; i < _I; i++) {
                 for (int c = 0; c < _C; c++) {
                     for (int l = 0; l < _L; l++) {
-                        dir_param_p(i, c, l) = _p1(i,c,l);
+                        dir_param_p(i, c, l) =1;// _p1(i,c,l);
                     }
                 }
             }
