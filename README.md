@@ -5,8 +5,8 @@ stochastic EM in latent class models".
 The code in this version is available for simulation reproducibility purposes only.
 
 ## Usage
-To run the simulations launch the .R files, which recalls a C++ program. Be sure to have installed .R, and the R packages Rcpp, RcppEigen and
-RcppArmadillo. 
+To run the simulations launch the .R files, which recalls a C++ program. Be sure to have installed .R, and the R packages Rcpp, RcppEigen and RcppArmadillo. 
+The data used in the application are contained in the data_application.txt file.
 
 ## Citing us
 
